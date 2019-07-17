@@ -4,8 +4,11 @@ const DailyRotateFile = require('winston-daily-rotate-file');
 
 const logger = winston.createLogger({
   level: 'info',
-  format: winston.format.json(),
-  defaultMeta: { service: 'user-service' },
+  format: winston.format.combine(
+    winston.format.timestamp(),
+    winston.format.json(),
+  ),
+  defaultMeta: { service: 'aniang', date: Date() },
   transports: [
     //
     // - Write to all logs with level `info` and below to `combined.log` 
