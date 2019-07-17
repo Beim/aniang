@@ -1,0 +1,8 @@
+{
+  "dependencies": {
+    "app-root-path": "^2.2.1",
+    "bilibili-live": "^1.0.10",
+    "winston": "^3.2.1",
+    "winston-daily-rotate-file": "^3.10.0"
+  }
+}
