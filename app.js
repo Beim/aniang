@@ -16,6 +16,7 @@ function initRoom (url) {
         console.log('成功连接至弹幕服务器')
       })
       .on('danmaku.message', (msg) => {
+        if (msg.type === 'online') return;
         logger.info(msg);
         console.log(msg)
         count += 1
