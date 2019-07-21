@@ -2,6 +2,7 @@ const {Room, API} = require('bilibili-live');
 
 const logger = require('./config/winston');
 
+let lastComment = ''
 let LiveRoom = null
 let count = 0
 function initRoom (url) {
@@ -17,6 +18,12 @@ function initRoom (url) {
       })
       .on('danmaku.message', (msg) => {
         if (msg.type === 'online') return;
+        if (msg.type === 'comment') {
+          if (msg.comment === lastComment) {
+            return;
+          }
+          lastComment = msg.comment;
+        }
         logger.info(msg);
         console.log(msg)
         count += 1

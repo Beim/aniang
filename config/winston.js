@@ -2,13 +2,28 @@ const appRoot = require('app-root-path');
 const winston = require('winston');
 const DailyRotateFile = require('winston-daily-rotate-file');
 
+const timezoned = () => {
+  return new Date().toLocaleString('en-US', {
+    timeZone: 'Asia/Shanghai',
+    hour12: false,
+    year: 'numeric',
+    month: '2-digit',
+    day: '2-digit',
+    hour: '2-digit',
+    minute: '2-digit',
+    second: '2-digit'
+  });
+};
+
 const logger = winston.createLogger({
   level: 'info',
   format: winston.format.combine(
-    winston.format.timestamp(),
+    winston.format.timestamp({
+      format: timezoned,
+    }),
     winston.format.json(),
   ),
-  defaultMeta: { service: 'aniang', date: Date() },
+  defaultMeta: { service: 'aniang' },
   transports: [
     //
     // - Write to all logs with level `info` and below to `combined.log` 
